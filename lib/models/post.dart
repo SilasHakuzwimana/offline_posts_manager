@@ -1,4 +1,3 @@
-// models/post.dart
 // Defines the Post data model and its serialization to/from SQLite
 
 class Post {
@@ -41,11 +40,9 @@ class Post {
       body: map['body'] as String? ?? '',
       author: map['author'] as String? ?? '',
       category: map['category'] as String? ?? 'General',
-      createdAt:
-          DateTime.tryParse(map['created_at'] as String? ?? '') ??
+      createdAt: DateTime.tryParse(map['created_at'] as String? ?? '') ??
           DateTime.now(),
-      updatedAt:
-          DateTime.tryParse(map['updated_at'] as String? ?? '') ??
+      updatedAt: DateTime.tryParse(map['updated_at'] as String? ?? '') ??
           DateTime.now(),
     );
   }

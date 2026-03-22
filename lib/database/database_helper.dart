@@ -13,19 +13,19 @@ class DatabaseException implements Exception {
 }
 
 class DatabaseHelper {
-  // ── Singleton pattern ─────────────────
+  //  Singleton pattern
   static final DatabaseHelper _instance = DatabaseHelper._internal();
   factory DatabaseHelper() => _instance;
   DatabaseHelper._internal();
 
   static Database? _database;
 
-  // ── Constants ──────────────────────────
+  //  Constants
   static const String _dbName = 'posts_manager.db';
   static const int _dbVersion = 1;
   static const String _tableName = 'posts';
 
-  // ── Database initialisation ──────────────
+  // Database initialisation
   Future<Database> get database async {
     if (_database != null && _database!.isOpen) return _database!;
     _database = await _initDatabase();
@@ -48,7 +48,7 @@ class DatabaseHelper {
     }
   }
 
-  // ── DDL ──────────────────────────
+  //DDL
   Future<void> _createTable(Database db, int version) async {
     await db.execute('''
       CREATE TABLE $_tableName (
@@ -70,7 +70,7 @@ class DatabaseHelper {
     }
   }
 
-  // ── CRUD ────────────────────────────
+  //  CRUD
   /// CREATE – insert a new post and return its auto-generated id
   Future<int> insertPost(Post post) async {
     try {

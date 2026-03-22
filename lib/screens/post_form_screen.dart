@@ -1,7 +1,3 @@
-// screens/post_form_screen.dart
-// Reusable form screen for both CREATE and EDIT operations.
-// When [post] is null → create mode; otherwise → edit mode.
-
 import 'package:flutter/material.dart';
 
 import '../database/database_helper.dart';
@@ -51,7 +47,7 @@ class _PostFormScreenState extends State<PostFormScreen> {
     super.dispose();
   }
 
-  // ── Save ─────────────────────────────
+  //Save
   Future<void> _save() async {
     if (!_formKey.currentState!.validate()) return;
     setState(() => _isSaving = true);
@@ -118,7 +114,7 @@ class _PostFormScreenState extends State<PostFormScreen> {
     }
   }
 
-  // ── Build ───────────────────────────────────────────────────────────────────
+  //Build
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -164,7 +160,7 @@ class _PostFormScreenState extends State<PostFormScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // ── Title ──────────────────────────────────────────────────
+              //Title
               _buildLabel('Post Title *'),
               const SizedBox(height: 6),
               TextFormField(
@@ -183,7 +179,7 @@ class _PostFormScreenState extends State<PostFormScreen> {
               ),
               const SizedBox(height: 16),
 
-              // ── Author ─────────────────────────────────────────────────
+              //Author
               _buildLabel('Author *'),
               const SizedBox(height: 6),
               TextFormField(
@@ -200,7 +196,7 @@ class _PostFormScreenState extends State<PostFormScreen> {
               ),
               const SizedBox(height: 16),
 
-              // ── Category ────────────────────────────────────────────────
+              // Category
               _buildLabel('Category'),
               const SizedBox(height: 6),
               Container(
@@ -236,7 +232,7 @@ class _PostFormScreenState extends State<PostFormScreen> {
               ),
               const SizedBox(height: 16),
 
-              // ── Body ────────────────────────────────────────────────────
+              //Body
               _buildLabel('Content *'),
               const SizedBox(height: 6),
               TextFormField(
@@ -248,16 +244,18 @@ class _PostFormScreenState extends State<PostFormScreen> {
                 maxLines: 10,
                 maxLength: 5000,
                 validator: (v) {
-                  if (v == null || v.trim().isEmpty)
+                  if (v == null || v.trim().isEmpty) {
                     return 'Content is required';
-                  if (v.trim().length < 10)
+                  }
+                  if (v.trim().length < 10) {
                     return 'Content must be at least 10 characters';
+                  }
                   return null;
                 },
               ),
               const SizedBox(height: 30),
 
-              // ── Submit button ───────────────────────────────────────────
+              //Submit button
               SizedBox(
                 width: double.infinity,
                 height: 52,

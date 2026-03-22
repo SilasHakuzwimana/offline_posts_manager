@@ -30,7 +30,7 @@ class PostDetailScreen extends StatelessWidget {
       backgroundColor: const Color(0xFFF5F5F5),
       body: CustomScrollView(
         slivers: [
-          // ── SliverAppBar ──────────────────────────────────────────────
+          //SliverAppBar
           SliverAppBar(
             expandedHeight: 180,
             pinned: true,
@@ -88,7 +88,7 @@ class PostDetailScreen extends StatelessWidget {
             ),
           ),
 
-          // ── Content ───────────────────────────────────────────────────
+          // Content
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(20),

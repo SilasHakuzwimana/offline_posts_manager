@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-  // ── Data loading ─────────────────────
+  // Data loading
   Future<void> _loadPosts() async {
     setState(() {
       _isLoading = true;
@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  // ── Delete ───────────────────────
+  // Delete
   Future<void> _deletePost(Post post) async {
     final confirmed = await showDialog<bool>(
       context: context,
@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  // ── Category colour helper ────────────────
+  // Category colour helper
   Color _categoryColor(String category) {
     switch (category) {
       case 'News':
@@ -131,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  // ── Build ────────────────────────────
+  // Build
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -154,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Column(
         children: [
-          // ── Gradient header ───────────────
+          // Gradient header
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -236,7 +236,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
 
-          // ── Body ──────────────────────
+          //Body
           Expanded(child: _buildBody()),
         ],
       ),
@@ -346,7 +346,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-// ── Post Card Widget ───────────────
+// Post Card Widget
 class _PostCard extends StatelessWidget {
   final Post post;
   final Color categoryColor;
