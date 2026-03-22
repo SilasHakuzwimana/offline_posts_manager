@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:offline_posts_manager/widgets/post_card_widget.dart';
 
 import '../database/database_helper.dart';
 import '../models/post.dart';
@@ -216,17 +216,20 @@ class _HomeScreenState extends State<HomeScreen> {
                             _loadPosts();
                           },
                           labelStyle: TextStyle(
-                            color: selected ? Colors.white : Colors.white70,
+                            color: selected
+                                ? Colors.white
+                                : const Color.fromARGB(179, 0, 8, 11),
                             fontWeight:
-                                selected ? FontWeight.w700 : FontWeight.normal,
+                                selected ? FontWeight.w700 : FontWeight.w500,
                             fontSize: 12,
                           ),
-                          backgroundColor:
-                              const Color.fromARGB(0, 255, 255, 255)
-                                  .withOpacity(0.1),
+                          backgroundColor: Colors.transparent,
                           selectedColor: const Color(0xFFE94560),
                           checkmarkColor: Colors.white,
-                          side: BorderSide.none,
+                          side: BorderSide(
+                              color: selected
+                                  ? const Color(0xFFE94560)
+                                  : Colors.white38),
                         ),
                       );
                     }).toList(),
@@ -310,7 +313,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: ListView.builder(
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 100),
         itemCount: _posts.length,
-        itemBuilder: (_, i) => _PostCard(
+        itemBuilder: (_, i) => PostCard(
           post: _posts[i],
           categoryColor: _categoryColor(_posts[i].category),
           onTap: () async {
@@ -340,152 +343,6 @@ class _HomeScreenState extends State<HomeScreen> {
             }
           },
           onDelete: () => _deletePost(_posts[i]),
-        ),
-      ),
-    );
-  }
-}
-
-// Post Card Widget
-class _PostCard extends StatelessWidget {
-  final Post post;
-  final Color categoryColor;
-  final VoidCallback onTap;
-  final VoidCallback onEdit;
-  final VoidCallback onDelete;
-
-  const _PostCard({
-    required this.post,
-    required this.categoryColor,
-    required this.onTap,
-    required this.onEdit,
-    required this.onDelete,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final df = DateFormat('MMM d, yyyy · h:mm a');
-    return Card(
-      margin: const EdgeInsets.only(bottom: 12),
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(14),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Category badge + menu
-              Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 3,
-                    ),
-                    decoration: BoxDecoration(
-                      color: categoryColor.withOpacity(0.12),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Text(
-                      post.category,
-                      style: TextStyle(
-                        color: categoryColor,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: 0.5,
-                      ),
-                    ),
-                  ),
-                  const Spacer(),
-                  PopupMenuButton<String>(
-                    icon: const Icon(Icons.more_vert, size: 20),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    onSelected: (v) {
-                      if (v == 'edit') onEdit();
-                      if (v == 'delete') onDelete();
-                    },
-                    itemBuilder: (_) => [
-                      const PopupMenuItem(
-                        value: 'edit',
-                        child: Row(
-                          children: [
-                            Icon(Icons.edit, size: 18),
-                            SizedBox(width: 8),
-                            Text('Edit'),
-                          ],
-                        ),
-                      ),
-                      const PopupMenuItem(
-                        value: 'delete',
-                        child: Row(
-                          children: [
-                            Icon(Icons.delete, size: 18, color: Colors.red),
-                            SizedBox(width: 8),
-                            Text(
-                              'Delete',
-                              style: TextStyle(color: Colors.red),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8),
-              // Title
-              Text(
-                post.title,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700,
-                  color: Color(0xFF1A1A2E),
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(height: 6),
-              // Body preview
-              Text(
-                post.body,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontSize: 13,
-                  color: Colors.grey.shade600,
-                  height: 1.4,
-                ),
-              ),
-              const SizedBox(height: 10),
-              // Footer
-              Row(
-                children: [
-                  const Icon(
-                    Icons.person_outline,
-                    size: 14,
-                    color: Colors.grey,
-                  ),
-                  const SizedBox(width: 4),
-                  Text(
-                    post.author,
-                    style: const TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
-                  const Spacer(),
-                  const Icon(Icons.access_time, size: 13, color: Colors.grey),
-                  const SizedBox(width: 4),
-                  Text(
-                    df.format(post.createdAt),
-                    style: const TextStyle(fontSize: 11, color: Colors.grey),
-                  ),
-                ],
-              ),
-            ],
-          ),
         ),
       ),
     );
