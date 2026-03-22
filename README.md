@@ -1,4 +1,3 @@
-
 # Offline Posts Manager
 
 > **Flutter Lab 5** — Individual Assignment
@@ -7,9 +6,9 @@
 
 A Flutter application that lets media company staff **create, read, update, and delete posts entirely offline** using a local SQLite database. No internet connection required ever.
 
-## Screenshots
+## Screenshots & Demo video
 
-> *Add your app screenshots here after running the app on a device or emulator.*
+> *Find screenshots in lib/screenshots and demo in lib/demo*
 
 ## Features
 
@@ -135,7 +134,7 @@ Future<List<Post>> getAllPosts() async {
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/SilasHakuzwimanaE/offline_posts_manager.git
+git clone https://github.com/SilasHakuzwimana/offline_posts_manager.git
 cd offline_posts_manager
 
 # 2. Install dependencies
@@ -145,28 +144,16 @@ flutter pub get
 flutter run
 ```
 
-The app seeds **3 sample posts** on first launch so the list is never empty.
-
 ## Architecture Notes
 
 * **`DatabaseHelper` is a Singleton** — only one instance exists, preventing multiple simultaneous connections to the same SQLite file.
 * **`Post.copyWith()`** enables immutable updates — a new object is created with changed fields rather than mutating the original (idiomatic Flutter).
 * **`PostFormScreen` is shared** for both Create and Edit — when `post == null` it creates; otherwise it pre-fills and updates. Eliminates duplication and keeps validation in one place.
 
-## Submission Checklist
-
-* [ ] GitHub repository with all source code pushed
-* [ ] `pubspec.yaml` includes `sqflite`, `path`, `intl`
-* [ ] `DatabaseHelper` singleton implements all CRUD operations
-* [ ] `Post` model has `toMap()`, `fromMap()`, `copyWith()`
-* [ ] `HomeScreen` — list, search, category filter, delete
-* [ ] `PostDetailScreen` — read-only detail view
-* [ ] `PostFormScreen` — handles both Create and Edit
-* [ ] Delete uses a confirmation dialog
-* [ ] All DB calls wrapped in try/catch with `DatabaseException`
-* [ ] Form validation prevents empty / too-short fields
-* [ ] PDF with scanned handwritten answers + screenshots submitted
-
 ## License
 
 This project is submitted as coursework for educational purposes.
+
+**Author**
+
+[Silas HAKUZWIMANA(223001019)](https://github.com/SilasHakuzwimana)
